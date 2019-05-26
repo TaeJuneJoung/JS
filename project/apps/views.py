@@ -8,11 +8,11 @@ def likes(request):
 
 def like_click(request):
     islike = Love.objects.get_or_create(pk=1)
-    if islike.like:#like cancle
-        like_value = islike.like = 0
-        islike.save()
+    if islike[0].like:#like cancle
+        like_value = islike[0].like = 0
+        islike[0].save()
         return JsonResponse({'like_value':like_value})
     else:#like
-        like_value = islike.like = 1
-        islike.save()
+        like_value = islike[0].like = 1
+        islike[0].save()
         return JsonResponse({'like_value':like_value})
