@@ -15,10 +15,38 @@
 </head>
 <body>
     <div>
-        <i id="heart" class="far fa-heart"></i>
+        <i id="heart" class="far fa-heart" data-id="heart-1"></i>
     </div>
     <script>
         // 비동기통신 작성필요
+        let heartClick = document.getElementById('heart')
+        function request(method, url){
+            return new Promise(function(res, rej){
+                let xhr = new XMLHttpRequest();
+                xhr.open(method, url);
+                xhr.onload = res;
+                xhr.onerror = rej;
+                xhr.send();
+            });
+        }
+        heartClick.addEventListener('click', e => {
+            request('GET', "{% url 'apps:like_click' %}")
+                .then(function(e){
+                    console.log(e.target.response);
+                    let data = JSON.parse(e.target.response)
+                    console.log(data.like_value)
+                    if(data.like_value){
+                        heartClick.classList.remove('far')
+                        heartClick.classList.add('fas')
+                    }else{
+                        heartClick.classList.remove('fas')
+                        heartClick.classList.add('far')
+                    }
+                }, function(error){
+                    // handle errors
+                    console.log(error)
+            });
+        })
     </script>
 </body>
 </html>
