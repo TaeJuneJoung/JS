@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <input type="file" multiple>
+    <div id="thumbs">
+    
+    </div>
+    <script>
+    $('input[type="file"]').on('change', function() {
+        for (var i = 0; i < this.files.length; i++) {
+            var fr = new FileReader();
+            fr.onload = function(e) {
+            $('#thumbs').append('<img src="' + e.target.result + '" width="50px" height="50px">')
+            }
+            fr.readAsDataURL(this.files[i]);
+        }
+    });
+    </script>
+</body>
+</html>

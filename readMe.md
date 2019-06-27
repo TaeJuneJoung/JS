@@ -27,3 +27,10 @@
 >
 > 1. HTML + JS + DB
 > 2. HTML + JS + DB + 실시간(Web Socket)
+
+
+
+### 업로드 이미지 미리보기
+
+> thumbnails from a multiple files input
+
