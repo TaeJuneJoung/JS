@@ -4,64 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/12d92dde75.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <!-- 
-        [참고자료]
-        https://programmingsummaries.tistory.com/367
-        : 싱글이라서 이를 통해서 JS만 이용해서 이해 및 변경 시도중
-     -->
-    <img id="preview" src="" width="700" alt="로컬에 있는 이미지가 보여지는 영역">
-    <a id="download" download="thumbnail.jpg" target="_blank">
-        <img id="thumbnail" src="" width="100" alt="썸네일영역 (클릭하면 다운로드 가능)">
-    </a>
-    <input type="file" id="getfile" accept="image/*" multiple>
-    
-    <script>
-        var file = document.querySelector('#getfile');
 
-        file.onchange = function () {
+    <div class="container mt-5">
+        <input type="file" id="getfile" accept="image/*" multiple>
+        <table>
+            <tbody id="preview">
+                <tr id="cancleDiv"></tr>
+                <tr id="imgDiv"></tr>
+            </tbody>
+        </table>
+    </div>
+        <script>
+        let file = document.getElementById('getfile');
+        let imgIdx = 0;
+
+        file.onchange = () => {
             var fileList = file.files ;
 
             // 읽기
             for(let i=0; i < fileList.length; i++){
                 let reader = new FileReader();
-                console.log(reader)
                 reader.readAsDataURL(fileList[i]);
-                
                 //로드 한 후
                 reader.onload = function  () {
                     //로컬 이미지를 보여주기
-                    document.querySelector('#preview').src = reader.result;
+                    let cancleDiv = document.getElementById('cancleDiv');
+                    let imgDiv = document.getElementById('imgDiv');
+                    let previewLiCancle = document.createElement('td');
+                    let previewLiImg = document.createElement('td');
+                    let previewImg = document.createElement('img');
 
-                    //썸네일 이미지 생성
-                    var tempImage = new Image(); //drawImage 메서드에 넣기 위해 이미지 객체화
-                    tempImage.src = reader.result; //data-uri를 이미지 객체에 주입
-                    tempImage.onload = function () {
-                        //리사이즈를 위해 캔버스 객체 생성
-                        var canvas = document.createElement('canvas');
-                        var canvasContext = canvas.getContext("2d");
+                    previewLiCancle.innerHTML = '<i id="cancle_'+ imgIdx +'" class="fas fa-folder-minus"></i>';
+                    previewMinus = document.getElementById('cancle_'+imgIdx);
 
-                        //캔버스 크기 설정
-                        canvas.width = 100; //가로 100px
-                        canvas.height = 100; //세로 100px
-
-                        //이미지를 캔버스에 그리기
-                        canvasContext.drawImage(this, 0, 0, 100, 100);
-
-                        //캔버스에 그린 이미지를 다시 data-uri 형태로 변환
-                        var dataURI = canvas.toDataURL("image/jpeg");
-
-                        //썸네일 이미지 보여주기
-                        document.querySelector('#thumbnail').src = dataURI;
-
-                        //썸네일 이미지를 다운로드할 수 있도록 링크 설정
-                        document.querySelector('#download').href = dataURI;
-                    };
+                    // previewMinus.onclick = e => {
+                    //     let cancle_id = e.target.id;
+                    //     let idx = cancle_id.split('cancle')[1]
+                    //     console.log(cancle_id)
+                    //     console.log(idx)
+                    //     document.getElementById('img'+idx).remove()
+                    //     document.getElementById(cancle_id).remove()
+                    // }
+                    previewImg.src = reader.result;
+                    previewImg.width = 100;
+                    // previewMinus.id = 'cancle_'+imgIdx;
+                    previewLiImg.id = 'img_'+imgIdx;
+                    imgIdx++;
+                    cancleDiv.appendChild(previewLiCancle);
+                    imgDiv.appendChild(previewLiImg);
+                    previewLiImg.appendChild(previewImg);
                 };
             }
-
         };
     </script>
 </body>
