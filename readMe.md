@@ -33,4 +33,6 @@
 ### 업로드 이미지 미리보기
 
 > thumbnails from a multiple files input
-
+>
+> 1. 중복제거[필요여부 고민중]
+> 2. 이미지 칸 조절[일정 숫자 이후 내려가서 생성되게]
