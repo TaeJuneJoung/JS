@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ClickDBEvent</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <style>
+        #heart{
+            font-size:10rem;
+            color:#dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <i id="heart" class="far fa-heart" data-id="heart-1"></i>
+    </div>
+    <script>
+        // 비동기통신 작성필요
+        let heartClick = document.getElementById('heart')
+        function request(method, url){
+            return new Promise(function(res, rej){
+                let xhr = new XMLHttpRequest();
+                xhr.open(method, url);
+                xhr.onload = res;
+                xhr.onerror = rej;
+                xhr.send();
+            });
+        }
+        heartClick.addEventListener('click', e => {
+            request('GET', "{% url 'apps:like_click' %}")
+                .then(function(e){
+                    console.log(e.target.response);
+                    let data = JSON.parse(e.target.response)
+                    console.log(data.like_value)
+                    if(data.like_value){
+                        heartClick.classList.remove('far')
+                        heartClick.classList.add('fas')
+                    }else{
+                        heartClick.classList.remove('fas')
+                        heartClick.classList.add('far')
+                    }
+                }, function(error){
+                    // handle errors
+                    console.log(error)
+            });
+        })
+    </script>
+</body>
+</html>
