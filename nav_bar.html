@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      .back-gr {
+        height: calc(100% - 150px);
+      }
+      .back-gr2 {
+        position: relative;
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 1000px;
+      }
+    </style>
+</head>
+<body>
+    <!-- NavBar -->
+    <header>
+      <nav id="nav-bar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+      </nav>
+    </header>
+    <!-- BackgroundImage Div -->
+    <main role="main">
+      <div class="back-gr2 back-gr" style="background-image: url('https://images.unsplash.com/photo-1562386130-926081dc4fbf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=60');">
+        <div class="pt-5 pl-5">
+          내용을 담아야 이미지가 보인다.<br/>
+          얼마나 담아야 보이는지 확인해보기<br/>
+          NavBar를 움직여봅시다.<br/>
+          내용을 담아야 이미지가 보인다.<br/>
+          얼마나 담아야 보이는지 확인해보기<br/>
+          NavBar를 움직여봅시다.<br/>
+          내용을 담아야 이미지가 보인다.<br/>
+          얼마나 담아야 보이는지 확인해보기<br/>
+          NavBar를 움직여봅시다.<br/>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      let nav_bar = document.getElementById('nav-bar');
+      window.onscroll = () => {
+        if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          nav_bar.classList.add('bg-dark');
+        }else{
+          nav_bar.classList.remove('bg-dark');
+        }
+      }
+    </script>
+  </body>
+  </html>
